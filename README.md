@@ -1,4 +1,4 @@
-#Oregon Trail#
+# Oregon Trail
 Written in C++
 
 Creators:
