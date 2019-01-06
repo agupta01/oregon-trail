@@ -6,7 +6,7 @@ int money = 2000;
 int distance = 1600;
 int ammo;
 int food;
-
+//aruaruaruaru
 struct Event
 {
     int dDist;
