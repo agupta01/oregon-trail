@@ -101,8 +101,7 @@ int main()
     cout<<"How much ammo would you like to buy?"<<endl; 
     int ammoBought; 
     cin>> ammoBought;
-    while(1)
-    {
+    
         if(cin.fail())
     {  
         cin.clear();
@@ -111,6 +110,49 @@ int main()
         cout<<"You must enter an integer value "<<endl;
         cin>>ammoBought;
     }
+    while(10 * ammoBought > money)
+    {
+        cout<<"This amount is too much, please enter another amount"<<endl;
+        cin>>ammoBought;
+        if(cin.fail())
+    {  
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),
+        '\n');
+        cout<<"You must enter an integer value "<<endl;
+        cin>>ammoBought;
+    }
+    }
+    ammo += ammoBought;
+    money -= ammoBought *10;
+    cout << "How much food would you like to buy? Food costs $20"
+    int foodBought;
+    cin >> foodBought;
+    if(cin.fail())
+    {  
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),
+        '\n');
+        cout<<"You must enter an integer value "<<endl;
+        cin>>foodBought;
+    }
+    while(foodBought*20>money)
+    {
+        cout<<"This amount is too much, please enter another amount"<<endl;
+        cin>>foodBought;
+        if(cin.fail())
+    {  
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),
+        '\n');
+        cout<<"You must enter an integer value "<<endl;
+        cin>>ammoBought;
+    }
+    }
+    food +=foodBought;
+    money -= foodBought*20;
+    
+    
 
     int foodBought; 
     cin>>foodBought;
