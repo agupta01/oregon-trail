@@ -108,10 +108,8 @@ void init()
     }
 }
 
-int main()
+void store()
 {
-    init();
-
     cout << "You will be embarking on a 1600 mile journey for 30 days, where only the fittest will survive" << endl;
     cout << "Before you begin you must buy ammo and food with your starting $2000" << endl; 
     cout << "Ammo costs $10 while food costs $20" << endl; 
@@ -167,10 +165,22 @@ int main()
             cin>>ammoBought;
         }
     }
-    food +=foodBought;
+    food += foodBought;
     money -= foodBought*20; 
 
-    
+    cout << "You have $" << money << " left." << endl;
+    cout << "Items bought:" << endl;
+    cout << "Food: " << foodBought << endl;
+    cout << "Total Food: " << food << endl;
+    cout << "Ammo: " << ammoBought << endl;
+    cout << "Total Ammo: " << ammo << endl;
+}
+
+int main()
+{
+    init();
+    store();
+
     // //set characters
     // //set item amounts, etc
     // while(/*at least one player's health > 0, and distance to finish > 0*/)
