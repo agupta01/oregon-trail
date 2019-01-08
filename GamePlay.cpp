@@ -1,11 +1,15 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <random>
 using namespace std;
+
+//global variables
 int money = 2000;
-int distance = 1600;
+int distToTravel = 1600;
 int ammo;
 int food;
+int days = 0;
 
 struct Event
 {
@@ -53,6 +57,7 @@ int c[10][5]={{0,0,-20,0,0},
               {0,0,0,-250,0},  
               {0,0,0,0,-100},  
               {0,0,0,0,-30}};
+
 Event missionCreek[2];
 Event elitePrep[2];
 Event missionPeak[2];
@@ -60,7 +65,7 @@ Person players[5];
 
 void init()
 {
-    cout<<"Welcome to the Oregon-Trail Mission San Jose Edition"<<endl;
+    cout << "Welcome to the Oregon-Trail Mission San Jose Edition" << endl;
     
     //create obstacle classes
     for(int i = 0; i < 10; i++)
@@ -176,26 +181,55 @@ void store()
     cout << "Total Ammo: " << ammo << endl;
 }
 
+bool gameOn()
+{
+    for(int i = 0; i < 5; i++)
+    {
+        if (players[i].health <= 0)
+        {   
+            cout << "You died along the journey on day " << days << endl;
+            return false;
+        }
+    }
+
+    if (distToTravel <= 0)
+    {
+        cout << "Contratulations! You have made it to Oregon! Let's see how many points you have recieved." << endl;
+        return false;
+    } else if (days >= 30)
+    {
+        cout << "Your journey has now surpassed 30 days and everyone alive has contracted dysentery. You are all doomed to die." << endl;
+        return false;
+    }
+
+    return true;
+}
+
+
+
 int main()
 {
     init();
     store();
 
-    // //set characters
-    // //set item amounts, etc
-    // while(/*at least one player's health > 0, and distance to finish > 0*/)
-    // {
-    //     //option to travel
-    //     //obstacles per "turn"
-    // }
-
-    // if (/*died*/)
-    // {
-    //     cout << "You died along the journey at " << print wherever the last person died << endl;
-    // } else if (/*distance to finish = 0*/)
-    // {
-    //     cout << "Congratulations! You have made it to Oregon! Let's see how many points you have recieved." << endl;
-    //     //print date of arrival
-    //     //total and print number of points earned
-    // }
+   
+    while(gameOn())
+    {
+        int action = rand() % 3 + 1;
+        cout << action;
+        switch(action)
+        {
+            case 1:
+            days++;
+            break;
+            case 2:
+            days++;
+            break;
+            case 3:
+            days++;
+            break;
+        }
+        //option to travel
+        //obstacles per "turn"
+    }
 }
