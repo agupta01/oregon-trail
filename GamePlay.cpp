@@ -150,7 +150,7 @@ void store()
     cout << "How much food would you like to buy? Food costs $10, and each person consumes 1 food per day" << endl;
     int foodBought;
     cin >> foodBought;
-    if(cin.fail())
+    while(cin.fail() || foodBought *10 > money)
     {  
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(),
@@ -158,19 +158,19 @@ void store()
         cout<<"You must enter an integer value "<<endl;
         cin>>foodBought;
     }
-    while(foodBought * 10 > money)
-    {
-        cout<<"This amount is too much, please enter another amount"<<endl;
-        cin>>foodBought;
-        if(cin.fail())
-        {  
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),
-            '\n');
-            cout<<"You must enter an integer value "<<endl;
-            cin>>foodBought;
-        }
-    }
+    // while(foodBought * 10 > money)
+    // {
+    //     cout<<"This amount is too much, please enter another amount"<<endl;
+    //     cin>>foodBought;
+    //     if(cin.fail())
+    //     {  
+    //         cin.clear();
+    //         cin.ignore(numeric_limits<streamsize>::max(),
+    //         '\n');
+    //         cout<<"You must enter an integer value "<<endl;
+    //         cin>>foodBought;
+    //     }
+    // }
     food += foodBought;
     money -= foodBought * 10; 
 
@@ -180,10 +180,12 @@ void store()
     cout << "Total Food: " << food << endl;
     cout << "Ammo: " << ammoBought << endl;
     cout << "Total Ammo: " << ammo << endl;
+    cin.clear();
 }
 
 bool gameOn()
 {
+    cin.clear();
     int dead = 0;
 
     for(int i = 0; i < 5; i++)
@@ -216,6 +218,7 @@ bool gameOn()
 
 void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NOTE: dFood is total amount req'd for the day by one player
 {   
+    cin.clear();
     distToTravel += dDist;
     for (int i = 0; i < 5; i++)
     {    
@@ -268,9 +271,11 @@ int main()
                 cin >> ct;
                 if(!cin.fail())
                 {
+                    cin.clear();
                     break;
                 } else {
                     cout << "Nice.";
+                    cin.clear();
                     break;
                 }
             case 2:
@@ -279,9 +284,11 @@ int main()
                 cin >> ct;
                 if(!cin.fail())
                 {
+                    cin.clear();
                     break;
                 } else {
                     cout << "Nice.";
+                    cin.clear();
                     break;
                 }
             case 3:
@@ -290,9 +297,11 @@ int main()
                 cin >> ct;
                 if(!cin.fail())
                 {
+                    cin.clear();
                     break;
                 } else {
                     cout << "Nice.";
+                    cin.clear();
                     break;
                 }
             case 4:
@@ -303,9 +312,11 @@ int main()
                 cin >> ct;
                 if(!cin.fail())
                 {
+                    cin.clear();
                     break;
                 } else {
                     cout << "Nice.";
+                    cin.clear();
                     break;
                 }
 
