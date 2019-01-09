@@ -114,20 +114,33 @@ void init()
 void store()
 {
     cout << "WELCOME TO THE STORE" << endl;
-    cout << "You must buy ammo and food with your starting $2000" << endl; 
+    cout << "You must buy ammo and food with your $"  << money << endl; 
     cout << "Ammo costs $10 while food costs $20" << endl; 
     cout << "How much ammo would you like to buy?" << endl; 
-    int ammoBought; 
-    cin >> ammoBought;
-    
-    if(cin.fail())
-    {  
+    double ammoBoughtraw;
+    cin >> ammoBoughtraw;
+    while(cin.fail())
+    {
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),
-        '\n');
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
         cout << "You must enter an integer value " << endl;
-        cin>>ammoBought;
+        cin>>ammoBoughtraw;
     }
+    int ammoBought = ammoBoughtraw;
+    while (ammoBoughtraw<0)
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "You can't buy negative ammo"  << endl;
+        cin>>ammoBoughtraw;
+    }
+    int temp = ammoBoughtraw;
+    if (ammoBoughtraw!=temp)
+    {
+        cout << "You have entered a non-integer value. " << ammoBoughtraw << " has been truncated to " << temp << "." << endl;
+        ammoBought = temp;
+    }
+    ammoBought = temp;
     while(10 * ammoBought > money)
     {
         cout<<"This amount is too much, please enter another amount"<<endl;
@@ -147,31 +160,54 @@ void store()
 
     cout << "Money left: $" << money << endl;
 
-    cout << "How much food would you like to buy? Food costs $10, and each person consumes 1 food per day" << endl;
-    int foodBought;
-    cin >> foodBought;
-    while(cin.fail() || foodBought *10 > money)
-    {  
-        cin.ignore(numeric_limits<streamsize>::max(),
-        '\n');
-        cout<<"You must enter an integer value "<<endl;
+    cout << "How much food would you like to buy? Food costs $20, and each person consumes 1 food per day" << endl;
+    double foodBoughtraw;
+    cin >> foodBoughtraw;
+    while(cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "You must enter an integer value " << endl;
+        cin>>foodBoughtraw;
+    }
+    int foodBought = foodBoughtraw;
+    while (foodBoughtraw<0)
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "You can't buy negative food"  << endl;
+        cin>>foodBoughtraw;
+    }
+    int temp2 = foodBoughtraw;
+    if (foodBoughtraw!=temp2)
+    {
+        cout << "You have entered a non-integer value. " << foodBoughtraw << " has been truncated to " << temp2 << "." << endl;
+        foodBought = temp2;
+    }
+    foodBought = temp2;
+    while(cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "You must enter an integer value " << endl;
         cin>>foodBought;
     }
-    // while(foodBought * 10 > money)
-    // {
-    //     cout<<"This amount is too much, please enter another amount"<<endl;
-    //     cin>>foodBought;
-    //     if(cin.fail())
-    //     {  
-    //         cin.clear();
-    //         cin.ignore(numeric_limits<streamsize>::max(),
-    //         '\n');
-    //         cout<<"You must enter an integer value "<<endl;
-    //         cin>>foodBought;
-    //     }
-    // }
+    while(20 * foodBought > money)
+    {
+        cout<<"This amount is too much, please enter another amount"<<endl;
+        cin>>foodBought;
+        
+        if(cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),
+                       '\n');
+            cout<<"You must enter an integer value "<<endl;
+            cin>>foodBought;
+        }
+    }
     food += foodBought;
-    money -= foodBought * 10; 
+    money -= foodBought * 20;
 
     cout << "You have $" << money << " left." << endl;
     cout << "Items bought:" << endl;
