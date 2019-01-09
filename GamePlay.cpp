@@ -152,7 +152,6 @@ void store()
     cin >> foodBought;
     while(cin.fail() || foodBought *10 > money)
     {  
-        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(),
         '\n');
         cout<<"You must enter an integer value "<<endl;
