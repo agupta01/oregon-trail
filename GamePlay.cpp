@@ -258,68 +258,32 @@ int main()
     while(gameOn())
     {
         cout << endl << "------- DAY " << days << " -------" << endl;
-        int action = rand() % 4 + 1;
+        int action = rand() % 10 + 1;
         cout << action << endl;
         string ct;
-        switch(action)
+        if (action == 1 || action == 2) //no action - 20%
         {
-            //no event, travel 80 miles
-            case 1:
-                cout << "Nothing happened today, but you traveled 80 miles!" << endl;
-                updateValues(-80, 0, 0, 0, 1);
-                cout << "Press any key to continue." << endl;
-                cin >> ct;
-                if(!cin.fail())
-                {
-                    cin.clear();
-                    break;
-                } else {
-                    cout << "Nice.";
-                    cin.clear();
-                    break;
-                }
-            case 2:
-                updateValues(0,0,0,0,1);
-                cout << "Press any key to continue." << endl;
-                cin >> ct;
-                if(!cin.fail())
-                {
-                    cin.clear();
-                    break;
-                } else {
-                    cout << "Nice.";
-                    cin.clear();
-                    break;
-                }
-            case 3:
-                updateValues(0,0,0,0,1);
-                cout << "Press any key to continue." << endl;
-                cin >> ct;
-                if(!cin.fail())
-                {
-                    cin.clear();
-                    break;
-                } else {
-                    cout << "Nice.";
-                    cin.clear();
-                    break;
-                }
-            case 4:
-                cout << "You have chanced open a store in the wilderness! If you would not like to buy anything, you do not have to." << endl;
-                store();
-                updateValues(-80, 0, 0, 0, 1);
-                cout << "Press any key to continue." << endl;
-                cin >> ct;
-                if(!cin.fail())
-                {
-                    cin.clear();
-                    break;
-                } else {
-                    cout << "Nice.";
-                    cin.clear();
-                    break;
-                }
-
+            cout << "Nothing happened today, but you traveled 80 miles!" << endl;
+            updateValues(-80, 0, 0, 0, 1);
+            cout << "Press any key to continue." << endl;
+            cin >> ct;
+        } else if (action >= 3 && action <= 5) //bad news - 30%
+        {
+            updateValues(-80, 0, 0, 0, 1);
+            cout << "Press any key to continue." << endl;
+            cin >> ct;
+        } else if (action >= 6 && action <= 8) //good news - 30%
+        {
+            updateValues(-80, 0, 0, 0, 1);
+            cout << "Press any key to continue." << endl;
+            cin >> ct;
+        } else //store - 20%
+        {
+            cout << "You have chanced upon a store in the wilderness! If you would not like to buy anything, you do not have to." << endl;
+            store();
+            updateValues(-80, 0, 0, 0, 1);
+            cout << "Press any key to continue." << endl;
+            cin >> ct;
         }
         //obstacles per "turn"
     }
