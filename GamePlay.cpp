@@ -296,23 +296,23 @@ int main()
         int action = rand() % 10 + 1;
         cout << action << endl;
         string ct;
-        if (action == 1 || action == 2) //no action - 20%
+        if (action >= 1 && action <= 3) //no action - 30%
         {
             cout << "Nothing happened today, but you traveled 80 miles!" << endl;
             updateValues(-80, 0, 0, 0, 1);
             cout << "Press any key to continue." << endl;
             cin >> ct;
-        } else if (action >= 3 && action <= 5) //bad news - 30%
+        } else if (action >= 4 && action <= 6) //bad news - 30%
         {
             updateValues(-80, 0, 0, 0, 1);
             cout << "Press any key to continue." << endl;
             cin >> ct;
-        } else if (action >= 6 && action <= 8) //good news - 30%
+        } else if (action >= 7 && action <= 9) //good news - 30%
         {
             updateValues(-80, 0, 0, 0, 1);
             cout << "Press any key to continue." << endl;
             cin >> ct;
-        } else //store - 20%
+        } else //store - 10%
         {
             cout << "You have chanced upon a store in the wilderness! If you would not like to buy anything, you do not have to." << endl;
             store();
