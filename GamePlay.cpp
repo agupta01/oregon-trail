@@ -113,10 +113,16 @@ void init()
 
 //features
 
-//called by send_news()
+//called in determine_action()
 void good_news()
 {
-    
+    cout << "under development" << endl;
+}
+
+//called in determine_action()
+void bad_news()
+{
+    cout << "under developement" << endl;
 }
 
 
@@ -308,6 +314,7 @@ void determine_action()
                 break;
                 
             case 4 ... 6: //bad news - 30%
+                bad_news();
                 updateValues(-80, 0, 0, 0, 1);
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
