@@ -21,42 +21,42 @@ struct Event
 };
 
 struct Person{
-    string name; 
+    string name;
     int health;
 };
 
 int a[10][5]={{0,-2,0,0,0},
-              {0,0,0,0,-150},  
-              {0,-1,0,0,0},  
-              {0,0,0,0,-100},  
-              {0,0,-10,0,0},  
-              {0,0,-20,0,0},  
-              {0,0,0,-200,0},  
-              {0,0,0,-50,0},  
-              {-50,0,0,0,0},  
-              {-10,0,0,0,0}};
+    {0,0,0,0,-150},
+    {0,-1,0,0,0},
+    {0,0,0,0,-100},
+    {0,0,-10,0,0},
+    {0,0,-20,0,0},
+    {0,0,0,-200,0},
+    {0,0,0,-50,0},
+    {-50,0,0,0,0},
+    {-10,0,0,0,0}};
 
 int b[10][5]={{0,-2,0,0,0},
-              {0,0,0,0,-500},  
-              {0,-1,0,0,0},  
-              {0,0,0,0,-600},  
-              {0,0,-5,0,0},  
-              {0,0,-10,0,0},  
-              {0,0,0,0,-100},  
-              {0,0,0,-300,0},  
-              {-150,0,0,0,0},  
-              {-50,0,0,0,0}};
+    {0,0,0,0,-500},
+    {0,-1,0,0,0},
+    {0,0,0,0,-600},
+    {0,0,-5,0,0},
+    {0,0,-10,0,0},
+    {0,0,0,0,-100},
+    {0,0,0,-300,0},
+    {-150,0,0,0,0},
+    {-50,0,0,0,0}};
 
 int c[10][5]={{0,0,-20,0,0},
-              {-100,0,0,0,0},  
-              {0,-2,0,0,0},  
-              {0,-3,0,0,0},  
-              {0,0,-30,0,0},  
-              {-10,0,0,0,0},  
-              {0,0,0,-25,0},  
-              {0,0,0,-250,0},  
-              {0,0,0,0,-100},  
-              {0,0,0,0,-30}};
+    {-100,0,0,0,0},
+    {0,-2,0,0,0},
+    {0,-3,0,0,0},
+    {0,0,-30,0,0},
+    {-10,0,0,0,0},
+    {0,0,0,-25,0},
+    {0,0,0,-250,0},
+    {0,0,0,0,-100},
+    {0,0,0,0,-30}};
 
 Event missionCreek[2];
 Event elitePrep[2];
@@ -64,7 +64,7 @@ Event missionPeak[2];
 Person players[5];
 
 void init()
-{   
+{
     //create obstacle classes
     for(int i = 0; i < 10; i++)
     {
@@ -85,9 +85,9 @@ void init()
         elitePrep[i].dMoney = b[i][3];
         elitePrep[i].dFood = b[i][4];
         //cout << "Done copying b" << endl;
-
+        
     }
-
+    
     
     for(int i = 0; i < 10; i++)
     {
@@ -97,26 +97,35 @@ void init()
         missionPeak[i].dMoney = c[i][3];
         missionPeak[i].dFood = c[i][4];
         //cout << "Done copying c" << endl;
-
-    } 
+        
+    }
     
     //create players
     for (int i = 0; i< 5; i++)
     {
-        cout<<"What is player "<< i + 1 << "'s name?"<<endl; 
-        string name; 
+        cout<<"What is player "<< i + 1 << "'s name?"<<endl;
+        string name;
         cin >> name;
         players[i].name = name;
         players[i].health = 10;
     }
 }
 
+//features
+
+//called by send_news()
+void good_news()
+{
+    
+}
+
+
 void store()
 {
     cout << "WELCOME TO THE STORE" << endl;
-    cout << "You must buy ammo and food with your $"  << money << endl; 
-    cout << "Ammo costs $10 while food costs $20" << endl; 
-    cout << "How much ammo would you like to buy?" << endl; 
+    cout << "You must buy ammo and food with your $"  << money << endl;
+    cout << "Ammo costs $10 while food costs $20" << endl;
+    cout << "How much ammo would you like to buy?" << endl;
     double ammoBoughtraw;
     cin >> ammoBoughtraw;
     while(cin.fail())
@@ -145,21 +154,21 @@ void store()
     {
         cout<<"This amount is too much, please enter another amount"<<endl;
         cin>>ammoBought;
-
+        
         if(cin.fail())
-        {  
+        {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(),
-            '\n');
+                       '\n');
             cout<<"You must enter an integer value "<<endl;
             cin>>ammoBought;
         }
     }
     ammo += ammoBought;
     money -= ammoBought * 10;
-
+    
     cout << "Money left: $" << money << endl;
-
+    
     cout << "How much food would you like to buy? Food costs $20, and each person consumes 1 food per day" << endl;
     double foodBoughtraw;
     cin >> foodBoughtraw;
@@ -208,7 +217,7 @@ void store()
     }
     food += foodBought;
     money -= foodBought * 20;
-
+    
     cout << "You have $" << money << " left." << endl;
     cout << "Items bought:" << endl;
     cout << "Food: " << foodBought << endl;
@@ -222,22 +231,22 @@ bool gameOn()
 {
     cin.clear();
     int dead = 0;
-
+    
     for(int i = 0; i < 5; i++)
     {
         if (players[i].health <= 1)
-        {   
+        {
             cout << players[i].name << " died along the journey on day " << days << " due to bad health." << endl;
             dead++;
         }
     }
-
+    
     if (dead == 5)
     {
         cout << "Everyone on the journey has died and the game is over." << endl;
         return false;
     }
-
+    
     if (distToTravel <= 0)
     {
         cout << "Contratulations! You have made it to Oregon! Let's see how many points you have recieved." << endl;
@@ -247,16 +256,16 @@ bool gameOn()
         cout << "Your journey has now surpassed 30 days and everyone alive has contracted dysentery. You are all doomed to die." << endl;
         return false;
     }
-
+    
     return true;
 }
 
 void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NOTE: dFood is total amount req'd for the day by one player
-{   
+{
     cin.clear();
     distToTravel += dDist;
     for (int i = 0; i < 5; i++)
-    {    
+    {
         //if no food left, takes 1 away from each unfed players' health
         if (food <= 0)
         {
@@ -266,9 +275,9 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NO
             food -= dFood;
         }
     }
-
+    
     days++;
-
+    
     cout << "Distance left to travel: " << distToTravel << endl;
     cout << "$" << money << endl;
     cout << "Ammo Left: " << ammo << endl;
@@ -280,48 +289,63 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NO
     }
 }
 
-int main()
+//conduct today's action
+void determine_action()
 {
-    srand (time(NULL));
-
-    cout << "Welcome to Oregon Trail: MSJ Edition! You will be embarking on a 1600 mile journey for 30 days, where only the fittest will survive." << endl;
-
-    init();
-    store();
-
-   
     while(gameOn())
     {
-        cout << endl << "------- DAY " << days << " -------" << endl;
+        //rand num for determining today's action
         int action = rand() % 10 + 1;
         cout << action << endl;
         string ct;
-        if (action >= 1 && action <= 3) //no action - 30%
+        switch (action)
         {
-            cout << "Nothing happened today, but you traveled 80 miles!" << endl;
-            updateValues(-80, 0, 0, 0, 1);
-            cout << "Press any key to continue." << endl;
-            cin >> ct;
-        } else if (action >= 4 && action <= 6) //bad news - 30%
-        {
-            updateValues(-80, 0, 0, 0, 1);
-            cout << "Press any key to continue." << endl;
-            cin >> ct;
-        } else if (action >= 7 && action <= 9) //good news - 30%
-        {
-            updateValues(-80, 0, 0, 0, 1);
-            cout << "Press any key to continue." << endl;
-            cin >> ct;
-        } else //store - 10%
-        {
-            cout << "You have chanced upon a store in the wilderness! If you would not like to buy anything, you do not have to." << endl;
-            store();
-            updateValues(-80, 0, 0, 0, 1);
-            cout << "Press any key to continue." << endl;
-            cin >> ct;
+            case 1 ... 3: //no action - 30%
+                cout << "Nothing happened today, but you traveled 80 miles!" << endl;
+                updateValues(-80, 0, 0, 0, 1);
+                cout << "Press any key to continue." << endl;
+                cin >> ct;
+                break;
+                
+            case 4 ... 6: //bad news - 30%
+                updateValues(-80, 0, 0, 0, 1);
+                cout << "Press any key to continue." << endl;
+                cin >> ct;
+                break;
+                
+            case 7 ... 9: //good news - 30%
+                updateValues(-80, 0, 0, 0, 1);
+                cout << "Press any key to continue." << endl;
+                cin >> ct;
+                break;
+                
+            case 10: //store - 10%
+                cout << "You have chanced upon a store in the wilderness! If you would not like to buy anything, you do not have to." << endl;
+                store();
+                updateValues(-80, 0, 0, 0, 1);
+                cout << "Press any key to continue." << endl;
+                cin >> ct;
+                break;
+                
+            default:
+                cerr << "error in choosing today's action" << endl;
+                break;
         }
-        //obstacles per "turn"
     }
+}
 
+int main()
+{
+    srand (time(NULL));
+    
+    cout << "Welcome to Oregon Trail: MSJ Edition! You will be embarking on a 1600 mile journey for 30 days, where only the fittest will survive." << endl;
+    
+    init();
+    store();
+    
+    cout << endl << "------- DAY " << days << " -------" << endl;
+    //figure out action for today
+    determine_action();
+    
     return 0;
 }
