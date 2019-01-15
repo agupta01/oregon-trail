@@ -116,7 +116,8 @@ void init()
 //called in determine_action()
 void good_news()
 {
-    cout << "under development" << endl;
+    int variety_news = rand()%3 + 1;
+    
 }
 
 //called in determine_action()
