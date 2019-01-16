@@ -339,7 +339,7 @@ void bad_news()
     cout << "under developement" << endl;
 }
 
-//conduct today's action
+//conduct each day's action
 void determine_action()
 {
     while(gameOn())
@@ -358,18 +358,16 @@ void determine_action()
                 break;
                 
             case 4 ... 6: //bad news - 30%
-                //debugging
-                cout << "\nBAD NEWS\n" << endl;
+                //debugging: cout << "\nBAD NEWS\n" << endl;
                 bad_news();
-                updateValues(-80, 0, 0, 0, 1);
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
                 break;
                 
             case 7 ... 9: //good news - 30%
-                //debugging
-                cout <<"\nGOOD NEWS\n"<<endl;
-                updateValues(-80, 0, 0, 0, 1);
+                //debugging: cout <<"\nGOOD NEWS\n"<<endl;
+                //process good news function
+                good_news();
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
                 break;
@@ -391,15 +389,14 @@ void determine_action()
 
 int main()
 {
-    srand (time(NULL));
+    srand (time(NULL)/1000);
     
     cout << "Welcome to Oregon Trail: MSJ Edition! You will be embarking on a 1600 mile journey for 30 days, where only the fittest will survive." << endl;
     
     init();
     store();
     
-    cout << endl << "------- DAY " << days << " -------" << endl;
-    //figure out action for today
+    //conduct each day's action
     determine_action();
     
     return 0;
