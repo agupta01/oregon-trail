@@ -111,14 +111,6 @@ void init()
     }
 }
 
-//features
-
-//called by send_news()
-void good_news()
-{
-    
-}
-
 
 void store()
 {
@@ -289,7 +281,65 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NO
     }
 }
 
-//conduct today's action
+//features
+
+//called in determine_action()
+void good_news()
+{
+    int variety_news = rand()%3 + 1;
+    string g_news_choice;
+    switch (variety_news)
+    {
+        case 1:
+            cout << "Your friend is actually low-key smart and took the right shortcut with healing herbs. You have traveled 200 miles and gained 2 health." << endl;
+            //now update values
+            updateValues(-200, 2,0,0,0);
+            break;
+            
+        case 2:
+            cout << "You found a Starbucks vendor leading you to gain 10 health and 20 food." << endl;
+            //update
+            updateValues(-175, 10, 0,0, 20);
+            break;
+            
+        case 3:
+            cout << "You enter a ghost town...a man appears. He is slient. You are afraid. However, he is holding a hot cup of delectable ramen, so you approach him. As you get closer, you see a holster on his side which holds his glock." << endl << "You have 2 choices, interact(enter \"i\") or run away(enter \"r\")" << endl;
+            
+            cin >> g_news_choice;
+            while(g_news_choice!="i"||g_news_choice!="r")
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cout << "You must enter either \"i\" or \"r\"!" << endl;
+            }
+            if(g_news_choice=="i")
+            {
+                cout << "Congrats! Interacting with people is the way to go. Your social skills have gotten you a new friend as well as 5 health, 10 ammo, $200, and 10 food" << endl;
+                updateValues(-150, 5, 10, 200, 10);
+            } else if(g_news_choice=="r"){
+                cout << "Your lack of social skills is pathetic. If you could lose a heart...wait you can...you lose 2 health but since you found food in the town you gain 15 food." << endl;
+                updateValues(-150, -2, 0,0, 15);
+            }else{
+                cerr << "some error has occurred at line 149" << endl;
+            }
+            
+            break;
+            
+        default:
+            cerr << "some error has occurred at line 325" << endl;
+            break;
+    }
+    
+    
+}
+
+//called in determine_action()
+void bad_news()
+{
+    cout << "under developement" << endl;
+}
+
+//conduct each day's action
 void determine_action()
 {
     while(gameOn())
@@ -308,13 +358,16 @@ void determine_action()
                 break;
                 
             case 4 ... 6: //bad news - 30%
-                updateValues(-80, 0, 0, 0, 1);
+                //debugging: cout << "\nBAD NEWS\n" << endl;
+                bad_news();
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
                 break;
                 
             case 7 ... 9: //good news - 30%
-                updateValues(-80, 0, 0, 0, 1);
+                //debugging: cout <<"\nGOOD NEWS\n"<<endl;
+                //process good news function
+                good_news();
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
                 break;
@@ -336,15 +389,14 @@ void determine_action()
 
 int main()
 {
-    srand (time(NULL));
+    srand (time(NULL)/1000);
     
     cout << "Welcome to Oregon Trail: MSJ Edition! You will be embarking on a 1600 mile journey for 30 days, where only the fittest will survive." << endl;
     
     init();
     store();
     
-    cout << endl << "------- DAY " << days << " -------" << endl;
-    //figure out action for today
+    //conduct each day's action
     determine_action();
     
     return 0;
