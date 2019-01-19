@@ -286,6 +286,7 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NO
 //called in determine_action()
 void good_news()
 {
+    // 3 types of good news randomly chosen
     int variety_news = rand()%3 + 1;
     string g_news_choice;
     switch (variety_news)
@@ -336,7 +337,27 @@ void good_news()
 //called in determine_action()
 void bad_news()
 {
-    cout << "under developement" << endl;
+    //3 types of bad news with varying effects
+    int variety_news = rand()%3 + 1;
+    
+    switch (variety_news) {
+        case 1:
+            //add storyline/punishment
+            //add updateValues()
+            break;
+        case 2:
+            
+            
+            break;
+        case 3:
+            
+            
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 //conduct each day's action
