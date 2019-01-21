@@ -321,44 +321,78 @@ void good_news()
                 cout << "Your lack of social skills is pathetic. If you could lose a heart...wait you can...you lose 2 health but since you found food in the town you gain 15 food." << endl;
                 updateValues(-150, -2, 0,0, 15);
             }else{
-                cerr << "some error has occurred at line 149" << endl;
+                cerr << "some error has occurred at line 150" << endl;
             }
             
             break;
             
         default:
-            cerr << "some error has occurred at line 325" << endl;
+            cerr << "some error has occurred at line 326" << endl;
             break;
     }
     
     
 }
 
+
+
+
 //called in determine_action()
 void bad_news()
 {
+    
     //3 types of bad news with varying effects
     int variety_news = rand()%3 + 1;
     
-    switch (variety_news) {
+    switch (variety_news)
+    
+    
+    {
         case 1:
+            cout << "The dum friend who was clearly instructed to do nothing has once again doomed your party. He strolled into a forest and attracted a horde of wild goblins. Though you succesfully fended them all off, you have gone a hundred miles off-track and lost 1 health." << endl;
             //add storyline/punishment
             //add updateValues()
+            updateValues(100, -1, 0,0,0);
             break;
+            
         case 2:
-            
-            
+            cout << "You were mugged along the way by a group of bandits. You lost 10 health, 10 food, 10 ammo, and $100 "
+            updateValues(0, -10, -10, -100, -10);
             break;
         case 3:
+            cout << "You enter a small village warm with a welcoming atmosphere. People walking around welcome you in and invite you to rest. They offer a warm shower and then a hearty meal. You finally walk upstairs to rest." << endl << "You have two choices, sleep in the room. You are hesitant because everything feels slightly too perfect (enter \"i\") or leave for the night (enter \"r\") " << endl;
             
+            cin >> b_news_choice;
+            while (b_news_choice!="i"||b_news_choice!="r")
+            {
+                cin.clear()
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cout << "You must enter either \"i\" or \"r\"!" << endl;
+            }
+            if(b_news_choice=="i")
+            {
+                cout << "Congrats! Your suspicion was correct. You got mugged in your sleep and lost everything. You even got moved into the middle of the forest, away from your destination." << endl;
+                updateValues(150, -10, -10, -20, -10);
+            }
+            else if(b_news_choice=="r")
+            {
+                cout << "You got played once again. This was a dead-end, you woudlve lost either ways. You got mugged and lost your food and money." << endl;
+                updateValues(0, 0, 0,-50, -15);        }
+            else
+            {
+                cerr << "some error has occurred at line ___" << endl;
+                
+            }
             
             break;
             
         default:
+            cerr << "some error has occurred at line ___" << endl;
             break;
     }
-    
 }
+
+
 
 //conduct each day's action
 void determine_action()
