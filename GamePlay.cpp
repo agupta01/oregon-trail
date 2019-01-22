@@ -356,7 +356,7 @@ void bad_news()
             break;
             
         case 2:
-            cout << "You were mugged along the way by a group of bandits. You lost 10 health, 10 food, 10 ammo, and $100 "
+            cout << "You were mugged along the way by a group of bandits. You succesfully fend them off but use up 10 ammo in the process. While you sleep from the tiring encounter they come back and attack while also stealing your resources.You lost 10 health, 10 food, and $100 as well. "
             updateValues(0, -10, -10, -100, -10);
             break;
         case 3:
