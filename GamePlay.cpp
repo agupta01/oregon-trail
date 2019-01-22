@@ -329,7 +329,7 @@ void good_news()
             cout << "You enter a ghost town...a man appears. He is slient. You are afraid. However, he is holding a hot cup of delectable ramen, so you approach him. As you get closer, you see a holster on his side which holds his glock." << endl << "You have 2 choices, interact(enter \"i\") or run away(enter \"r\")" << endl;
             
             cin >> g_news_choice;
-            while(g_news_choice!="i"||g_news_choice!="r")
+            while(g_news_choice!="i" && g_news_choice!="r")
             {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -385,7 +385,7 @@ void bad_news()
             cout << "You enter a small village warm with a welcoming atmosphere. People walking around welcome you in and invite you to rest. They offer a warm shower and then a hearty meal. You finally walk upstairs to rest." << endl << "You have two choices, sleep in the room. You are hesitant because everything feels slightly too perfect (enter \"i\") or leave for the night (enter \"r\") " << endl;
             
             cin >> b_news_choice;
-            while (b_news_choice!="i"||b_news_choice!="r")
+            while (b_news_choice!="i" && b_news_choice!="r")
             {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
