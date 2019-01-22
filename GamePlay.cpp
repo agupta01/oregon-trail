@@ -343,7 +343,7 @@ void bad_news()
     
     //3 types of bad news with varying effects
     int variety_news = rand()%3 + 1;
-    
+    string b_news_choice;
     switch (variety_news)
     
     
