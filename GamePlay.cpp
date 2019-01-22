@@ -255,10 +255,24 @@ bool gameOn()
 void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood, int tFood) //NOTE: dFood is total amount req'd for the day by one player
 {
     cin.clear();
+
+    // global value updates
     distToTravel += dDist;
     ammo += dAmmo;
     money += dMoney;
     food += tFood;
+
+    // health/ammo mechanics
+    if (dAmmo < 0)
+    {
+        cout << "You didn't have any ammo left, so everyone in your party has been killed. All health has been set to 0." << endl;
+        for (int i = 0; i < 5; i++)
+        {
+            players[i].health = 0;
+        }
+    }
+
+    // health/food mechanics
     for (int i = 0; i < 5; i++)
     {
         //if no food left, takes 1 away from each unfed players' health
@@ -271,7 +285,7 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood, int 
         }
     }
 
-    for (int i = 0; i < 5, i++)
+    for (int i = 0; i < 5; i++)
     {
         players[i].health += dHealth;
     }
