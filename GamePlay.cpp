@@ -263,7 +263,7 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood, int 
     food += tFood;
 
     // health/ammo mechanics
-    if (dAmmo < 0)
+    if (dAmmo < 0 && ammo <= 0)
     {
         cout << "You didn't have any ammo left, so everyone in your party has been killed. All health has been set to 0." << endl;
         for (int i = 0; i < 5; i++)
@@ -421,6 +421,7 @@ void bad_news()
 //conduct each day's action
 void determine_action()
 {
+    cout << "-------- DAY " << day << "--------" << endl;
     while(gameOn())
     {
         //rand num for determining today's action
@@ -468,7 +469,7 @@ void determine_action()
 
 int main()
 {
-    srand (time(NULL)/1000);
+    srand(time(NULL));
     
     cout << "Welcome to Oregon Trail: MSJ Edition! You will be embarking on a 1600 mile journey for 30 days, where only the fittest will survive." << endl;
     
