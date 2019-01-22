@@ -421,7 +421,7 @@ void bad_news()
 //conduct each day's action
 void determine_action()
 {
-    cout << "-------- DAY " << day << "--------" << endl;
+    cout << "-------- DAY " << days << "--------" << endl;
     while(gameOn())
     {
         //rand num for determining today's action
