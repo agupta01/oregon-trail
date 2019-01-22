@@ -252,10 +252,13 @@ bool gameOn()
     return true;
 }
 
-void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NOTE: dFood is total amount req'd for the day by one player
+void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood, int tFood) //NOTE: dFood is total amount req'd for the day by one player
 {
     cin.clear();
     distToTravel += dDist;
+    ammo += dAmmo;
+    money += dMoney;
+    food += tFood;
     for (int i = 0; i < 5; i++)
     {
         //if no food left, takes 1 away from each unfed players' health
@@ -266,6 +269,11 @@ void updateValues(int dDist, int dHealth, int dAmmo, int dMoney, int dFood) //NO
         } else {
             food -= dFood;
         }
+    }
+
+    for (int i = 0; i < 5, i++)
+    {
+        players[i].health += dHealth;
     }
     
     days++;
@@ -294,13 +302,13 @@ void good_news()
         case 1:
             cout << "Your friend is actually low-key smart and took the right shortcut with healing herbs. You have traveled 200 miles and gained 2 health." << endl;
             //now update values
-            updateValues(-200, 2,0,0,0);
+            updateValues(-200, 2, 0, 0, 1, 0);
             break;
             
         case 2:
-            cout << "You found a Starbucks vendor leading you to gain 10 health and 20 food." << endl;
+            cout << "You found a Starbucks vendor leading you to gain 4 health and 20 food." << endl;
             //update
-            updateValues(-175, 10, 0,0, 20);
+            updateValues(-175, 4, 0,0,1, 20);
             break;
             
         case 3:
@@ -315,11 +323,11 @@ void good_news()
             }
             if(g_news_choice=="i")
             {
-                cout << "Congrats! Interacting with people is the way to go. Your social skills have gotten you a new friend as well as 5 health, 10 ammo, $200, and 10 food" << endl;
-                updateValues(-150, 5, 10, 200, 10);
+                cout << "Congrats! Interacting with people is the way to go. Your social skills have gotten you a new friend as well as 2 health, 10 ammo, $200, and 10 food" << endl;
+                updateValues(-150, 2, 10, 200, 1, 10);
             } else if(g_news_choice=="r"){
                 cout << "Your lack of social skills is pathetic. If you could lose a heart...wait you can...you lose 2 health but since you found food in the town you gain 15 food." << endl;
-                updateValues(-150, -2, 0,0, 15);
+                updateValues(-150, -2, 0, 0, 1, 15);
             }else{
                 cerr << "some error has occurred at line 150" << endl;
             }
@@ -349,15 +357,15 @@ void bad_news()
     
     {
         case 1:
-            cout << "The dum friend who was clearly instructed to do nothing has once again doomed your party. He strolled into a forest and attracted a horde of wild goblins. Though you succesfully fended them all off, you have gone a hundred miles off-track and lost 1 health." << endl;
+            cout << "The dumb friend who was clearly instructed to do nothing has once again doomed your party. He strolled into a forest and attracted a horde of wild goblins. Though you succesfully fended them all off, you have gone a hundred miles off-track and lost 1 health each, and 10 ammo." << endl;
             //add storyline/punishment
             //add updateValues()
-            updateValues(100, -1, 0,0,0);
+            updateValues(100, -1, -10, 0, 1, 0);
             break;
             
         case 2:
-            cout << "You were mugged along the way by a group of bandits. You succesfully fend them off but use up 10 ammo in the process. While you sleep from the tiring encounter they come back and attack while also stealing your resources.You lost 10 health, 10 food, and $100 as well. ";
-            updateValues(0, -10, -10, -100, -10);
+            cout << "You were mugged along the way by a group of bandits. You succesfully fend them off but use up 10 ammo in the process. While you sleep from the tiring encounter they come back and attack while also stealing your resources.You lost 5 health each, 10 food, and $100 as well. ";
+            updateValues(0, -5, -10, -100, 1, -10);
             break;
         case 3:
             cout << "You enter a small village warm with a welcoming atmosphere. People walking around welcome you in and invite you to rest. They offer a warm shower and then a hearty meal. You finally walk upstairs to rest." << endl << "You have two choices, sleep in the room. You are hesitant because everything feels slightly too perfect (enter \"i\") or leave for the night (enter \"r\") " << endl;
@@ -372,23 +380,24 @@ void bad_news()
             }
             if(b_news_choice=="i")
             {
-                cout << "Congrats! Your suspicion was correct. You got mugged in your sleep and lost everything. You even got moved into the middle of the forest, away from your destination." << endl;
-                updateValues(150, -10, -10, -20, -10);
+                cout << "Congrats! Your suspicion was correct. You got mugged in your sleep and lost everything. You even got moved into the middle of the forest, away from your destination. An illness also required everyone to take double rations for the night." << endl;
+                updateValues(150, -4, -10, -50, 2, -10);
             }
             else if(b_news_choice=="r")
             {
-                cout << "You got played once again. This was a dead-end, you woudlve lost either ways. You got mugged and lost your food and money." << endl;
-                updateValues(0, 0, 0,-50, -15);        }
+                cout << "You got played once again. This was a dead-end, you woudlve lost either ways. You got mugged and lost your food and money. An illness also required everyone to take double rations for the night." << endl;
+                updateValues(-80, 0, 0,-50, 2, -10);        
+            }
             else
             {
-                cerr << "some error has occurred at line ___" << endl;
+                cerr << "some error has occurred at line 393" << endl;
                 
             }
             
             break;
             
         default:
-            cerr << "some error has occurred at line ___" << endl;
+            cerr << "some error has occurred at line 400" << endl;
             break;
     }
 }
@@ -408,7 +417,7 @@ void determine_action()
         {
             case 1 ... 3: //no action - 30%
                 cout << "Nothing happened today, but you traveled 80 miles!" << endl;
-                updateValues(-80, 0, 0, 0, 1);
+                updateValues(-80, 0, 0, 0, 1, 0);
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
                 break;
@@ -431,7 +440,7 @@ void determine_action()
             case 10: //store - 10%
                 cout << "You have chanced upon a store in the wilderness! If you would not like to buy anything, you do not have to." << endl;
                 store();
-                updateValues(-80, 0, 0, 0, 1);
+                updateValues(-80, 0, 0, 0, 1, 0);
                 cout << "Press any key to continue." << endl;
                 cin >> ct;
                 break;
