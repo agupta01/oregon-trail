@@ -356,7 +356,7 @@ void bad_news()
             break;
             
         case 2:
-            cout << "You were mugged along the way by a group of bandits. You lost 10 health, 10 food, 10 ammo, and $100 "
+            cout << "You were mugged along the way by a group of bandits. You lost 10 health, 10 food, 10 ammo, and $100 ";
             updateValues(0, -10, -10, -100, -10);
             break;
         case 3:
@@ -365,9 +365,10 @@ void bad_news()
             cin >> b_news_choice;
             while (b_news_choice!="i"||b_news_choice!="r")
             {
-                cin.clear()
+                cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
                 cout << "You must enter either \"i\" or \"r\"!" << endl;
+                cin.clear();
             }
             if(b_news_choice=="i")
             {
