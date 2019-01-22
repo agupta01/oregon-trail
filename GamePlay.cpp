@@ -242,6 +242,7 @@ bool gameOn()
     if (distToTravel <= 0)
     {
         cout << "Contratulations! You have made it to Oregon! Let's see how many points you have recieved." << endl;
+        cout << "Total Points: " << ammo + food + money + players[0].health + players[1].health + players[2].health + players[3].health + players[4].health << endl;
         return false;
     } else if (days > 30)
     {
@@ -421,9 +422,9 @@ void bad_news()
 //conduct each day's action
 void determine_action()
 {
-    cout << "-------- DAY " << days << "--------" << endl;
     while(gameOn())
     {
+        cout << "-------- DAY " << days << "--------" << endl;
         //rand num for determining today's action
         int action = rand() % 10 + 1;
         cout << action << endl;
